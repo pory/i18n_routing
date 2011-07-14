@@ -91,6 +91,8 @@ module I18nRouting
     # Can take a block, if so, save the current context, set the new
     # Call the block, then restore the old context and return the block return
     def set_localizable_route(localizable)      
+      # Hotfix that allow to mount Engines to the routes.
+      init() unless @set.named_routes.respond_to?(:localizable)
       if block_given?
         old = @set.named_routes.localizable
         @set.named_routes.set_localizable_route(localizable)
